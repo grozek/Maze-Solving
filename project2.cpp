@@ -11,7 +11,7 @@
 #include "project2.hpp"
 #include <stack>
 using namespace std;
-
+#include "maze.hpp"
 /*
  * Depth First Search
  */
@@ -22,19 +22,22 @@ vector<int> DFS(vector<Vertex> &adjList, Vertex &start, Vertex &exit) {
   int previous = 0;
    stq.push(start.label);
    start.visited = true;
-
+   // std::cout << start.label << " ";
    while (!stq.empty()){
-      current = stq.top();
+     current = stq.top();
       stq.pop();
-      for (int i=0; i < adjList[current].neighbors[i]; i++){
-        if (adjList[current].visited == false){
-          adjList[current].visited == true;
-          stq.push(adjList[current].neighbors[i]);
-          adjList[previous] = current;
+      path.push_back(current);
+      if (current == exit.label){
+        break;
+      }
+      for (int neighbor : adjList[current].neighbors){
+        if (!adjList[neighbor].visited){
+          adjList[neighbor].visited == true;
+          adjList[neighbor].previous = current;
+          stq.push(neighbor);
         } //if
       } // for
-    } //while
-   /**/
+    } //while   /**/
     return path;
 }
 
