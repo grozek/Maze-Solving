@@ -18,21 +18,22 @@ using namespace std;
 vector<int> DFS(vector<Vertex> &adjList, Vertex &start, Vertex &exit) {
   std::stack<int> stq;
   std::vector<int> path;
+  
   int current = 0;
   int previous = 0;
    stq.push(start.label);
-   start.visited = true;
-   // std::cout << start.label << " ";
+   adjList[start.label].visited = true;
    while (!stq.empty()){
      current = stq.top();
-      stq.pop();
+     stq.pop();
       path.push_back(current);
+      std::cout << "Current vertex: " << current << std::endl;
       if (current == exit.label){
         break;
       }
       for (int neighbor : adjList[current].neighbors){
         if (!adjList[neighbor].visited){
-          adjList[neighbor].visited == true;
+          adjList[neighbor].visited = true;
           adjList[neighbor].previous = current;
           stq.push(neighbor);
         } //if
@@ -45,6 +46,27 @@ vector<int> DFS(vector<Vertex> &adjList, Vertex &start, Vertex &exit) {
  * Breadth First Search
  */
 vector<int> BFS(vector<Vertex> &adjList, Vertex &start, Vertex &exit) {
-    vector<int> path;
+  std::stack<int> que;
+  std::vector<int> path;
+  int current = 0;
+  int previous = 0;
+   que.push(start.label);
+   adjList[start.label].visited = true;
+   while (!que.empty()){
+     current = que.top();
+     que.pop();
+      path.push_back(current);
+      std::cout << "Current vertex: " << current << std::endl;
+      if (current == exit.label){
+        break;
+      }
+      for (int neighbor : adjList[current].neighbors){
+        if (!adjList[neighbor].visited){
+          adjList[neighbor].visited = true;
+          adjList[neighbor].previous = current;
+          que.push(neighbor);
+        } //if
+      } // for
+    } //while 
     return path;
 }
