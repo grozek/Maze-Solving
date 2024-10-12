@@ -9,29 +9,32 @@
  */
 
 #include "project2.hpp"
-
+#include <stack>
 using namespace std;
 
 /*
  * Depth First Search
  */
 vector<int> DFS(vector<Vertex> &adjList, Vertex &start, Vertex &exit) {
-    vector<int> path;
-    stack<vector> stq = path;
-    vector<int> current;
-    stq.push(start);
-    start.visited = true;
-    while (!stq.empty){
-      current = stq.pop();
-      for (int i=0; i < current.neighbors<i>; i++){
-        if (current.visited == false){
-          current.visited == true;
-          stack.push(current.neighbors<i>);
-          neighbours<i>.prev = current;
+  std::stack<int> stq;
+  std::vector<int> path;
+  int current = 0;
+  int previous = 0;
+   stq.push(start.label);
+   start.visited = true;
+
+   while (!stq.empty()){
+      current = stq.top();
+      stq.pop();
+      for (int i=0; i < adjList[current].neighbors[i]; i++){
+        if (adjList[current].visited == false){
+          adjList[current].visited == true;
+          stq.push(adjList[current].neighbors[i]);
+          adjList[previous] = current;
         } //if
       } // for
     } //while
-    
+   /**/
     return path;
 }
 
