@@ -17,6 +17,21 @@ using namespace std;
  */
 vector<int> DFS(vector<Vertex> &adjList, Vertex &start, Vertex &exit) {
     vector<int> path;
+    stack<vector> stq = path;
+    vector<int> current;
+    stq.push(start);
+    start.visited = true;
+    while (!stq.empty){
+      current = stq.pop();
+      for (int i=0; i < current.neighbors<i>; i++){
+        if (current.visited == false){
+          current.visited == true;
+          stack.push(current.neighbors<i>);
+          neighbours<i>.prev = current;
+        } //if
+      } // for
+    } //while
+    
     return path;
 }
 
